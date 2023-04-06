@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<xsd:schema
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="interface" type="interface"/>
+	<xsd:element name="package" type="xsd:string"/>
+	<xsd:complexType name="superclass">
+		<xsd:sequence>
+			<xsd:element name="class" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="include" type="xsd:string"/>
+	<xsd:complexType name="abstract_method">
+		<xsd:sequence>
+			<xsd:element name="access" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="parameters">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="argument" type="argument" minOccurs="0" maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="throws" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="exception" type="xsd:string" minOccurs="1" maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="return" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+		<xsd:attribute type="xsd:string" name="name"/>
+	</xsd:complexType>
+	<xsd:complexType name="argument">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute type="xsd:string" name="type"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="interface">
+		<xsd:sequence>
+			<xsd:element ref="package"  minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="superclass" type="superclass"/>
+			<xsd:element ref="include" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="abstract_method" type="abstract_method" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+	</xsd:complexType>
+</xsd:schema>
